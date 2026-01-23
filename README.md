@@ -1,2 +1,2 @@
 # ShopTheme-Nuxt
-The theme that was dwsiagned by Nuxt.js
+This theme was designed by Nuxt.js
