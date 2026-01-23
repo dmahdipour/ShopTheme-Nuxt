@@ -5,5 +5,6 @@ export default defineNuxtConfig({
   css:[
     "@/assets/css/custom.css",
     "@/assets/css/theme.css",
+    "@/assets/css/animate.min.css",
   ]
 })

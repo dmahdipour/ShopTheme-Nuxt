@@ -16,7 +16,6 @@
     useHead({
         link:[
             {rel:"stylesheet", href:"/css/dependencies.css"},
-            {rel:"stylesheet", href:"https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"},
         ],
         script:[
             {src:"/js/dependencies/bootstrap-slider.min.js", body:true},
