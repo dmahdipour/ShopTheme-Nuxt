@@ -26,7 +26,6 @@
             {src:"/js/dependencies/jquery.countdown.min.js", body:true},
             {src:"/js/dependencies/jquery.simple.timer.min.js", body:true},
             {src:"/js/dependencies/nouislider.min.js", body:true},
-            {src:"/js/dependencies/remodal.min.js", body:true},
             {src:"/js/dependencies/select2.min.js", body:true},
             {src:"/js/dependencies/simplebar.min.js", body:true},
             {src:"/js/dependencies/swiper-bundle.min.js", body:true},
