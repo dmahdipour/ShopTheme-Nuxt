@@ -24,3 +24,4 @@ logs
 !.env.example
 
 pages/test.vue
+pages/test2.vue
