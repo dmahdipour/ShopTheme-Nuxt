@@ -1,16 +1,15 @@
 <template>
-    <div>
-      <div class="form-element-row">
-        <label class="label fs-7"> {{ label }} </label>
-        <input 
-            :type="type"
-            :name="name"
-            :value="modelValue"
-            :placeholder="placeholder"
-            :class="['form-control',{'error-input': errorMessage}]"
-            @input="handleInputChange" />
-      </div>
-      <span v-if="errorMessage && !ignoreErrorMessage" class="text-danger"> {{ errorMessage }} </span>
+    <div class="form-element-row">
+    <label class="label fs-7"> {{ label }} </label>
+    <input 
+        :type="type"
+        :name="name"
+        :value="inputValue"
+        :placeholder="placeholder"
+        :class="['form-control',{'error-input': errorMessage}]"
+        @input="handleInputChange" 
+    />
+    <span v-if="errorMessage && !ignoreErrorMessage" class="text-danger"> {{ errorMessage }} </span>
     </div>
 </template>
 
@@ -43,7 +42,12 @@
         },
     });
 
-    const {errorMessage, value: inputValue, handleChange, setValue}=useField(props.name, undefined, {
+    const {
+        errorMessage, 
+        value: inputValue,
+        handleChange, 
+        setValue
+    }=useField(props.name, undefined, {
         initialValue: props.modelValue
     })
 
@@ -58,6 +62,6 @@
 
     const handleInputChange = (e: any) => {
         emit("update:modelValue", e.target.value);
-        handleInputChange(e);
+        handleChange(e);
     }
 </script>

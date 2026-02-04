@@ -1,3 +1,14 @@
 .error-input{
     border-color: red !important; 
 }
+
+.page-enter-active{
+    transition: alt 0.3s ease-out;
+}
+.page-leave-active{
+    transition: alt 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.page-enter-from,
+.page-leave-to{
+    opacity: 0;
+}
