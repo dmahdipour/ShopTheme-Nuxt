@@ -59,6 +59,8 @@
     import type { RegisterCommandDTo } from '~/models/auth/registerDTo';
     import { RegisterUser } from '~/services/auth.service';
     import * as Yup from 'yup';
+    import { useRouter } from 'vue-router';
+    import { ref, reactive } from 'vue';
 
     definePageMeta({
         layout: "auth",

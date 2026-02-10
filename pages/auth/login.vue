@@ -47,15 +47,18 @@
 
 <script setup lang="ts">
     import { Form } from 'vee-validate';
+    import { useRouter } from 'vue-router';
     import * as Yup from 'yup'
-    import type { LoginDTo } from '~/models/auth/login DTo';
-    import type { LoginResultDTo } from '~/models/auth/loginResultDTo';
+    import { ref, reactive } from 'vue';
+    import type { LoginDTo } from '~/models/auth/loginDTo';
     import { LoginUser } from '~/services/auth.service';
+    import { useAuthStore } from "~/stores/auhStore";
 
     definePageMeta({
         layout: "auth",
     })
 
+    const authStore = useAuthStore();
     const router = useRouter()
     
     const loginSchema = Yup.object().shape({
@@ -70,19 +73,24 @@
         password: "",
     })
     
-    const login = async(data, formEvent) => {
+    const login = async(data:any, formEvent:any) => {
         loading.value = true;
         var result = await LoginUser(loginData)
         loading.value = false
         if (result.isSuccess) {
-            localStorage.setItem('auth-data', JSON.stringify(result.data))
-            await router.push("/")
-        }
-        else{
+            localStorage.setItem("auth-data", JSON.stringify(result.data));
+            authStore.SetCurrentUserValue();
+            var returnTo = router.currentRoute.value.query.returnTo?.toString();
+            if (returnTo) {
+            await router.push(returnTo);
+            } else {
+            await router.push("/");
+            }
+        } else {
             formEvent.setFieldError(
-                'phoneNumber', 
-                "کاربری با این مشخصات یافت نشد"
-            )
+            "phoneNumber",
+            "کاربری با مشخصات وارد شده یافت نشد"
+            );
         }
     }
 </script>

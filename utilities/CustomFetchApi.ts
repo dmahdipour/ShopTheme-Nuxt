@@ -1,17 +1,26 @@
 import type { ApiResponse } from '~/models/ApiResponse';
 import { AppStatusCode } from '~/models/ApiResponse';
 import { $fetch, FetchError } from 'ofetch';
+import { useAuthStore } from '~/stores/auhStore';
 
 export async function FetchApi<T>(
     url: string,
     config: any = {},
 ): Promise<ApiResponse<T>> {
-    const customConfig = {
+    config = {
         baseURL: 'https://shop-api.codeyad-project.ir/api',
         ...config,
     };
 
-    return $fetch<ApiResponse<T>>(url, customConfig)
+    const authStore = useAuthStore();
+    if (!config.headers) {
+        config.headers = {};
+    }
+    if (authStore && authStore.isLogin) {
+        var loginData = authStore.loginResult;
+        config.headers["Authorization"] = `Bearer ${loginData.token}`;
+    }
+    return $fetch<ApiResponse<T>>(url, config)
         .then((res)=>{
             return res
         })

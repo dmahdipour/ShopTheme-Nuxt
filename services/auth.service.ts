@@ -1,5 +1,6 @@
 import type { ApiResponse } from "~/models/ApiResponse";
-import type { LoginDTo, LoginResultDTo } from "~/models/auth/loginResultDTo";
+import type { LoginResultDTo } from "~/models/auth/loginResultDTo";
+import type { LoginDTo } from "~/models/auth/loginDTo";
 import type { RegisterCommandDTo } from "~/models/auth/registerDTo";
 import { FetchApi } from "~/utilities/CustomFetchApi";
 
