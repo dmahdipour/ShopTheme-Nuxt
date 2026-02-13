@@ -2,13 +2,14 @@ import type { ApiResponse } from '~/models/ApiResponse';
 import { AppStatusCode } from '~/models/ApiResponse';
 import { $fetch, FetchError } from 'ofetch';
 import { useAuthStore } from '~/stores/auhStore';
+import { BASE_URL } from './ApiConfig';
 
 export async function FetchApi<T>(
     url: string,
     config: any = {},
 ): Promise<ApiResponse<T>> {
     config = {
-        baseURL: 'https://shop-api.codeyad-project.ir/api',
+        baseURL: BASE_URL,
         ...config,
     };
 
@@ -20,6 +21,7 @@ export async function FetchApi<T>(
         var loginData = authStore.loginResult;
         config.headers["Authorization"] = `Bearer ${loginData.token}`;
     }
+    
     return $fetch<ApiResponse<T>>(url, config)
         .then((res)=>{
             return res

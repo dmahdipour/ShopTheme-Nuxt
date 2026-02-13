@@ -1,5 +1,6 @@
 <template>
-  <div>
+    <div v-if="pending">Loading ...</div>
+  <div v-else>
     <div class="row mb-3 d-sm-block d-none">
         <div class="col-12">
             <!-- start of banner -->
@@ -12,41 +13,7 @@
     <div class="row mb-5">
         <div class="col-lg-8 mb-lg-0 mb-4">
             <!-- start of main-slider -->
-            <div class="swiper main-swiper-slider">
-                <!-- Additional required wrapper -->
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide main-swiper-slide">
-                        <a href="#"
-                            style="background-image: url(/images/slider/main/01.jpg);">
-                            <img src="/images/slider/main/01.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="swiper-slide main-swiper-slide">
-                        <a href="#"
-                            style="background-image: url(/images/slider/main/02.jpg);">
-                            <img src="/images/slider/main/02.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="swiper-slide main-swiper-slide">
-                        <a href="#"
-                            style="background-image: url(/images/slider/main/03.jpg);">
-                            <img src="/images/slider/main/03.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="swiper-slide main-swiper-slide">
-                        <a href="#"
-                            style="background-image: url(/images/slider/main/04.jpg);">
-                            <img src="/images/slider/main/04.jpg" alt="">
-                        </a>
-                    </div>
-                </div>
-                <!-- If we need pagination -->
-                <div class="swiper-pagination"></div>
-
-                <!-- If we need navigation buttons -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
+            <home-main-slider :data="data.data.sliders"></home-main-slider>
             <!-- end of main-slider -->
         </div>
         <div class="col-lg-4">
@@ -1321,7 +1288,19 @@
 </template>
 
 <script setup lang="ts">
+    import type { BannerPosition, HomeDataDto } from "~/models/home/homeDataDto";
+    import { FetchApi } from "~/utilities/CustomFetchApi";
 
+    const nuxtApp = useNuxtApp();
+    const { data, pending } = useAsyncData("main-page",
+        () => FetchApi<HomeDataDto>("/Utilities/MainPageData"), {
+            //getCachedData: key => nuxtApp.payload.data[key]
+        }
+    );
+
+    useHead({
+        title: "خانه",
+    })
 </script>
 
 <style>

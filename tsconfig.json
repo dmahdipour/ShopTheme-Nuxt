@@ -2,7 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./*"]
+      "~/*": ["./*"],
+      "~~/*": ["./*"],
+      "@/*": ["./*"]
     }
   },
   // https://nuxt.com/docs/guide/concepts/typescript

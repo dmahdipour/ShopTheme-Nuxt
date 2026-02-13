@@ -1,0 +1,120 @@
+<template>
+  <Carousel class="main__slider" dir="rtl" v-model="currentSlide" :autoplay="2000" wrapAround :itemsToShow="1" v-if="isShow">
+    <Slide 
+      class="swiper-slide main-swiper-slide"
+      v-for="(item, index) in data" :key="index"
+    >
+      <a class="carousel__item" :href="item.link">
+        <img :src="GetSliderImage(item.imageName)" :alt="item.title" />
+      </a>
+    </Slide>
+    <template #addons="{slidesCount}">
+      <div class="slider__navigation">
+        <div 
+          class="swiper-button-prev"
+          v-if="slidesCount >= currentSlide"
+          @click="currentSlide+=1"
+        ></div>
+        <div 
+          class="swiper-button-next"
+          v-if="currentSlide > 0"
+          @click="currentSlide-=1"
+        ></div>
+      </div>
+      <div class="slider__pagination">
+        <label
+          v-for="item in slidesCount" :key="item"
+          :class="{active: item==currentSlide+1}"
+          @click="currentSlide = item -1"
+        ></label>
+      </div>
+    </template>
+  </Carousel>
+</template>
+
+<script setup lang="ts">
+  import { Carousel, Navigation, Pagination, Slide } from "vue3-carousel";
+  import "vue3-carousel/dist/carousel.css";
+  import type { SliderDto } from "~/models/home/homeDataDto";
+  import { GetSliderImage } from "~/utilities/ImageUrls";
+
+  const props = defineProps<{
+    data: SliderDto[];
+  }>();
+  const currentSlide = ref(0);
+  const isShow=ref(false);
+
+  onMounted(()=>{
+    setTimeout(() => {
+      isShow.value=true;
+    }, 500);
+  })
+</script>
+
+<style>
+  @media screen and (max-width:990px) {
+    .main__slider .carousel__item img {
+        height: auto !important;
+    }
+  }
+
+  .main__slider .carousel__item {
+    border-radius: 15px;
+    width: 100%;
+  }
+
+  .main__slider .carousel__item img {
+    height: 455px;
+    border-radius: 15px;
+    width: 100%;
+  }
+
+  .main__slider .carousel__slide {
+    padding: 0;
+    border-radius: 15px !important;
+  }
+
+  .main__slider .swiper-button-prev::after,
+  .main__slider .swiper-button-next:after {
+    color: white !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+  }
+
+  .main__slider .swiper-button-prev,
+  .main__slider .swiper-button-next {
+    width: 55px !important;
+    height: 55px !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .slider__pagination {
+    display: flex;
+    gap: 0.5rem;
+    position: absolute;
+    bottom: 1rem;
+    width: 100%;
+    right: 0;
+    justify-content: center;
+  }
+
+  .slider__pagination label {
+    width: 6px;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.712);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .slider__pagination label.active {
+    background: white !important;
+    width: 8px !important;
+    height: 8px !important;
+  }
+
+  .main__slider .swiper-pagination-bullet-active-main {
+    background: white !important;
+  }
+
+</style>
