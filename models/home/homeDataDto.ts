@@ -7,11 +7,11 @@ export interface BannerDto {
   position: BannerPosition;
 }
 export enum BannerPosition {
-  زیر_اسلایدر = 0,
-  سمت_چپ_اسلایدر = 1,
-  بالای_اسلایدر = 2,
-  سمت_راست_شگفت_انگیز = 3,
-  وسط_صفحه = 4,
+  SliderBelove = 0,
+  SliderLeft = 1,
+  SliderTop = 2,
+  WonderfullRight = 3,
+  PageMiddle = 4,
 }
 
 export interface SliderDto {

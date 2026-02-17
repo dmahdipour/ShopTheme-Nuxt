@@ -1,65 +1,17 @@
 <template>
     <div v-if="pending">Loading ...</div>
   <div v-else>
-    <div class="row mb-3 d-sm-block d-none">
-        <div class="col-12">
-            <!-- start of banner -->
-            <div class="banner-img">
-                <a href="#"><img src="/images/banner/025.gif" alt="banner"></a>
-            </div>
-            <!-- end of banner -->
-        </div>
-    </div>
+    <home-banner :banners="data?.data.banners" :position="BannerPosition.SliderTop"></home-banner>
     <div class="row mb-5">
         <div class="col-lg-8 mb-lg-0 mb-4">
-            <!-- start of main-slider -->
             <home-main-slider :data="data.data.sliders"></home-main-slider>
-            <!-- end of main-slider -->
         </div>
         <div class="col-lg-4">
-            <div class="row">
-                <div class="col-lg-12 col-6 mb-lg-3">
-                    <!-- start of banner -->
-                    <div class="banner-img banner-side-main-slider bg-position-right">
-                        <a href="#"
-                            style="background-image: url(/images/banner/026.jpg);height:220px;">
-                            <img src="/images/banner/026.jpg" alt="">
-                        </a>
-                    </div>
-                    <!-- end of banner -->
-                </div>
-                <div class="col-lg-12 col-6">
-                    <!-- start of banner -->
-                    <div class="banner-img banner-side-main-slider bg-position-right">
-                        <a href="#"
-                            style="background-image: url(/images/banner/027.jpg);height:220px;">
-                            <img src="/images/banner/027.jpg" alt="">
-                        </a>
-                    </div>
-                    <!-- end of banner -->
-                </div>
-            </div>
+            <home-banner :banners="data?.data.banners" :position="BannerPosition.SliderLeft"></home-banner>
         </div>
     </div>
     <div class="row mb-5">
-        <div class="col-md-6 mb-lg-0 mb-3">
-            <!-- start of banner -->
-            <div class="banner-img">
-                <a href="#">
-                    <img src="/images/banner/018.jpg" alt="">
-                </a>
-            </div>
-            <!-- end of banner -->
-        </div>
-        <div class="col-md-6 mb-lg-0 mb-3">
-            <!-- start of banner -->
-            <div class="banner-img">
-                <a href="#">
-                    <img src="/images/banner/019.jpg" alt="">
-                </a>
-            </div>
-            <!-- end of banner -->
-        </div>
+        <home-banner :banners="data?.data.banners" :position="BannerPosition.SliderBelove"></home-banner>
     </div>
     <!-- start of box => specials-product-slider -->
     <div class="ui-box ui-box-specials pb-3 mb-5" style="background-color: #f03426;">
@@ -70,8 +22,7 @@
                     <div class="col-lg-3 d-lg-block d-none">
                         <div class="specials-container">
                             <img src="/images/theme/specials.png" class="img-fluid" alt="">
-                            <a href="#" class="btn btn-sm btn-outline-light">مشاهده همه <i
-                                    class="ri-arrow-left-fill ms-2"></i></a>
+                            <a href="#" class="btn btn-sm btn-outline-light">مشاهده همه <i class="ri-arrow-left-fill ms-2"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -747,42 +698,7 @@
     </div>
     <!-- end of box => categories-slider -->
     <div class="row mb-5">
-        <div class="col-md-3 col-6 mb-lg-0 mb-3">
-            <!-- start of banner -->
-            <div class="banner-img">
-                <a href="#">
-                    <img src="/images/banner/020.jpg" alt="">
-                </a>
-            </div>
-            <!-- end of banner -->
-        </div>
-        <div class="col-md-3 col-6 mb-lg-0 mb-3">
-            <!-- start of banner -->
-            <div class="banner-img">
-                <a href="#">
-                    <img src="/images/banner/021.jpg" alt="">
-                </a>
-            </div>
-            <!-- end of banner -->
-        </div>
-        <div class="col-md-3 col-6 mb-lg-0 mb-3">
-            <!-- start of banner -->
-            <div class="banner-img">
-                <a href="#">
-                    <img src="/images/banner/022.jpg" alt="">
-                </a>
-            </div>
-            <!-- end of banner -->
-        </div>
-        <div class="col-md-3 col-6 mb-lg-0 mb-3">
-            <!-- start of banner -->
-            <div class="banner-img">
-                <a href="#">
-                    <img src="/images/banner/023.jpg" alt="">
-                </a>
-            </div>
-            <!-- end of banner -->
-        </div>
+        <home-banner :banners="data?.data.banners" :position="BannerPosition.PageMiddle"></home-banner>
     </div>
     <!-- start of box -->
     <div class="ui-box mb-5">
@@ -1263,32 +1179,13 @@
             </div>
         </div>
     </div>
-    <!-- end of box -->
-    <div class="row mb-5">
-        <div class="col-md-6 mb-lg-0 mb-3">
-            <!-- start of banner -->
-            <div class="banner-img">
-                <a href="#">
-                    <img src="/images/banner/018.jpg" alt="">
-                </a>
-            </div>
-            <!-- end of banner -->
-        </div>
-        <div class="col-md-6 mb-lg-0 mb-3">
-            <!-- start of banner -->
-            <div class="banner-img">
-                <a href="#">
-                    <img src="/images/banner/019.jpg" alt="">
-                </a>
-            </div>
-            <!-- end of banner -->
-        </div>
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-    import type { BannerPosition, HomeDataDto } from "~/models/home/homeDataDto";
+    import Banner from "~/components/home/banner.vue";
+import type { HomeDataDto } from "~/models/home/homeDataDto";
+    import { BannerPosition } from '~/models/home/homeDataDto';
     import { FetchApi } from "~/utilities/CustomFetchApi";
 
     const nuxtApp = useNuxtApp();
